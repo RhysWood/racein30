@@ -14,17 +14,50 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "VOTE 30: Spoiler free F1 race poll",
-  description: "A spoiler free F1 race poll",
+  description: "Vote whether to watch the full F1 race or just the 30-minute highlights. Community-driven, spoiler-free F1 race recommendations.",
+  keywords: ["F1", "Formula 1", "race highlights", "F1 voting", "race in 30", "spoiler free F1"],
+  openGraph: {
+    title: "VOTE 30: Spoiler free F1 race poll",
+    description: "Community-driven F1 race viewing recommendations",
+    type: "website",
+    url: "https://racein30.com",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Race in 30 - F1 Race Voting Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VOTE 30: Spoiler free F1 race poll",
+    description: "Community-driven F1 race viewing recommendations",
+    images: ["/twitter-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-    
+    <html 
+      lang="en" 
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
       <body>
         <main className="app">
-        <Nav />
-        {children}
+          <Nav />
+          {children}
         </main>
       </body>
     </html>
