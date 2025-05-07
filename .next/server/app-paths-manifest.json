@@ -1,5 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/analytics/route": "app/api/analytics/route.js",
   "/api/current-race/route": "app/api/current-race/route.js",
   "/api/vote/route": "app/api/vote/route.js",

@@ -210,7 +210,7 @@ function VoteButtons({ raceId, onVoteComplete }) {
             if (!response.ok) throw new Error('Vote failed');
             (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$localStorage$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["saveVote"])(raceId, voteType);
             setSelected(voteType);
-            onVoteComplete?.();
+            onVoteComplete?.(voteType);
         } catch (err) {
             setError('Failed to submit vote. Please try again.');
             console.error(err);
@@ -243,12 +243,12 @@ function VoteButtons({ raceId, onVoteComplete }) {
                         className: "relative group",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>handleVote('30'),
+                                onClick: ()=>handleVote('full'),
                                 disabled: isLoading || selected,
                                 className: `px-6 py-4 rounded-2xl text-white text-lg font-semibold transition-all duration-200 ease-in-out
-              bg-gray-800 hover:bg-gray-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
-              ${selected === '30' ? 'ring-4 ring-blue-400' : ''}`,
-                                children: "Race in 30"
+              bg-red-600 hover:bg-red-500 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+              ${selected === 'full' ? 'ring-4 ring-green-400' : ''}`,
+                                children: "Full Race Replay"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/voting/VoteButtons.jsx",
                                 lineNumber: 58,
@@ -256,7 +256,7 @@ function VoteButtons({ raceId, onVoteComplete }) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150",
-                                children: "😴"
+                                children: "�"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/voting/VoteButtons.jsx",
                                 lineNumber: 67,
@@ -272,12 +272,12 @@ function VoteButtons({ raceId, onVoteComplete }) {
                         className: "relative group",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>handleVote('full'),
+                                onClick: ()=>handleVote('30'),
                                 disabled: isLoading || selected,
                                 className: `px-6 py-4 rounded-2xl text-white text-lg font-semibold transition-all duration-200 ease-in-out
-              bg-red-600 hover:bg-red-500 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
-              ${selected === 'full' ? 'ring-4 ring-green-400' : ''}`,
-                                children: "Full Race Replay"
+              bg-blue-500 hover:bg-blue-400 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+              ${selected === '30' ? 'ring-4 ring-blue-400' : ''}`,
+                                children: "Race in 30"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/voting/VoteButtons.jsx",
                                 lineNumber: 74,
@@ -285,7 +285,7 @@ function VoteButtons({ raceId, onVoteComplete }) {
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150",
-                                children: "🔥"
+                                children: "�"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/voting/VoteButtons.jsx",
                                 lineNumber: 83,

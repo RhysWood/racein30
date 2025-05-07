@@ -36,7 +36,7 @@ export default function VoteButtons({ raceId, onVoteComplete }) {
       
       saveVote(raceId, voteType);
       setSelected(voteType);
-      onVoteComplete?.();
+      onVoteComplete?.(voteType);
     } catch (err) {
       setError('Failed to submit vote. Please try again.');
       console.error(err);
@@ -53,23 +53,7 @@ export default function VoteButtons({ raceId, onVoteComplete }) {
     <div className="flex flex-col items-center space-y-6">
       <h2 className="text-2xl font-bold text-center">How was the race?</h2>
       <div className="flex gap-6">
-        {/* Race in 30 Button */}
-        <div className="relative group">
-          <button
-            onClick={() => handleVote('30')}
-            disabled={isLoading || selected}
-            className={`px-6 py-4 rounded-2xl text-white text-lg font-semibold transition-all duration-200 ease-in-out
-              bg-gray-800 hover:bg-gray-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
-              ${selected === '30' ? 'ring-4 ring-blue-400' : ''}`}
-          >
-            Race in 30
-          </button>
-          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-            😴
-          </span>
-        </div>
-
-        {/* Full Race Replay Button */}
+        {/* Full Race Replay Button (Red, first) */}
         <div className="relative group">
           <button
             onClick={() => handleVote('full')}
@@ -81,15 +65,31 @@ export default function VoteButtons({ raceId, onVoteComplete }) {
             Full Race Replay
           </button>
           <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-            🔥
+            �
+          </span>
+        </div>
+  
+        {/* Race in 30 Button (Blue, second) */}
+        <div className="relative group">
+          <button
+            onClick={() => handleVote('30')}
+            disabled={isLoading || selected}
+            className={`px-6 py-4 rounded-2xl text-white text-lg font-semibold transition-all duration-200 ease-in-out
+              bg-blue-500 hover:bg-blue-400 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+              ${selected === '30' ? 'ring-4 ring-blue-400' : ''}`}
+          >
+            Race in 30
+          </button>
+          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            �
           </span>
         </div>
       </div>
-
+  
       {error && (
         <p className="text-red-500 mt-4 text-sm">{error}</p>
       )}
-
+  
       {selected && !error && (
         <p className="text-green-500 mt-4 text-sm">
           Thanks for voting for the <strong>{selected === 'full' ? 'Full Race' : 'Race in 30'}</strong>!
