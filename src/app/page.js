@@ -1,5 +1,7 @@
 import ErrorBoundary from './components/ErrorBoundary';
 import TheRace from './components/voting/TheRace';
+import PreviousRaces from './components/history/PreviousRaces';
+
 
 export default function Home() {
   return (
@@ -8,6 +10,7 @@ export default function Home() {
         <ErrorBoundary>
           <TheRace />
         </ErrorBoundary>
+        <PreviousRaces />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center text-gray-500 text-sm mt-10">
         racein30
