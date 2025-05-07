@@ -40,9 +40,22 @@ export const trackVote = async (raceId, voteType) => {
       },
     };
 
-    // Ensure fetch is called
+    // Helper to get the correct analytics endpoint URL
+    const getAnalyticsUrl = () => {
+      if (typeof window === 'undefined') {
+        // Server-side: must use absolute URL
+        const base =
+          process.env.NEXT_PUBLIC_SITE_URL ||
+          (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+          'http://localhost:3000';
+        return `${base}/api/analytics`;
+      }
+      // Client-side: relative URL is fine
+      return '/api/analytics';
+    };
+
     if (typeof fetch !== 'undefined') {
-      await fetch('/api/analytics', {
+      await fetch(getAnalyticsUrl(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(analyticsData),

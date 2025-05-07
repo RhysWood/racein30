@@ -125,22 +125,22 @@ async function GET() {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$utils$2f$database$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDb"])();
         const currentDate = new Date();
-        // Find the next race that hasn't happened yet
-        const nextRace = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
+        // Find the most recent race whose date is today or earlier
+        const currentRace = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
             date: {
-                $gte: currentDate
+                $lte: currentDate
             }
         }).sort({
-            date: 1
+            date: -1
         });
-        if (!nextRace) {
+        if (!currentRace) {
             return new Response(JSON.stringify({
-                message: "No upcoming races found"
+                message: "No past or current races found"
             }), {
                 status: 404
             });
         }
-        return new Response(JSON.stringify(nextRace), {
+        return new Response(JSON.stringify(currentRace), {
             status: 200
         });
     } catch (error) {

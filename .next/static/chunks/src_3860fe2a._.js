@@ -505,11 +505,21 @@ const TheRace = ()=>{
             getCurrentRace();
         }
     }["TheRace.useEffect"], []);
+    // Add this handler to update votes instantly
+    const handleVoteComplete = (voteType)=>{
+        setCurrentRace((prev)=>({
+                ...prev,
+                votes: {
+                    ...prev.votes,
+                    [voteType === 'full' ? 'fullRace' : 'raceIn30']: prev.votes[voteType === 'full' ? 'fullRace' : 'raceIn30'] + 1
+                }
+            }));
+    };
     if (!currentRace) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: "Loading..."
     }, void 0, false, {
         fileName: "[project]/src/app/components/voting/TheRace.jsx",
-        lineNumber: 23,
+        lineNumber: 36,
         columnNumber: 28
     }, this);
     const formatDate = (dateString)=>{
@@ -527,7 +537,7 @@ const TheRace = ()=>{
                 children: currentRace.race
             }, void 0, false, {
                 fileName: "[project]/src/app/components/voting/TheRace.jsx",
-                lineNumber: 35,
+                lineNumber: 48,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -535,7 +545,7 @@ const TheRace = ()=>{
                 children: formatDate(currentRace.date)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/voting/TheRace.jsx",
-                lineNumber: 38,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -544,25 +554,26 @@ const TheRace = ()=>{
                     votes: currentRace.votes
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/voting/TheRace.jsx",
-                    lineNumber: 42,
+                    lineNumber: 55,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/voting/TheRace.jsx",
-                lineNumber: 41,
+                lineNumber: 54,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$voting$2f$VoteButtons$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                raceId: currentRace._id
+                raceId: currentRace._id,
+                onVoteComplete: handleVoteComplete
             }, void 0, false, {
                 fileName: "[project]/src/app/components/voting/TheRace.jsx",
-                lineNumber: 44,
+                lineNumber: 57,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/voting/TheRace.jsx",
-        lineNumber: 34,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 };

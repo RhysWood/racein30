@@ -20,6 +20,19 @@ const TheRace = () => {
     getCurrentRace();
   }, []);
 
+  // Add this handler to update votes instantly
+  const handleVoteComplete = (voteType) => {
+    setCurrentRace((prev) => ({
+      ...prev,
+      votes: {
+        ...prev.votes,
+        [voteType === 'full' ? 'fullRace' : 'raceIn30']: prev.votes[
+          voteType === 'full' ? 'fullRace' : 'raceIn30'
+        ] + 1,
+      },
+    }));
+  };
+
   if (!currentRace) return <div>Loading...</div>;
 
   const formatDate = (dateString) => {
@@ -41,7 +54,7 @@ const TheRace = () => {
       <div className="mt-6 mb-8 w-full">
         <VotingStats votes={currentRace.votes} />
       </div>
-      <VoteButtons raceId={currentRace._id} />
+      <VoteButtons raceId={currentRace._id} onVoteComplete={handleVoteComplete} />
     </div>
   );
 };
