@@ -6,20 +6,20 @@ export async function GET() {
     await connectToDb();
 
     const currentDate = new Date();
-    
-    // Find the next race that hasn't happened yet
-    const nextRace = await RaceWeekend.findOne({
-      date: { $gte: currentDate }
-    }).sort({ date: 1 });
 
-    if (!nextRace) {
+    // Find the most recent race whose date is today or earlier
+    const currentRace = await RaceWeekend.findOne({
+      date: { $lte: currentDate }
+    }).sort({ date: -1 });
+
+    if (!currentRace) {
       return new Response(
-        JSON.stringify({ message: "No upcoming races found" }), 
+        JSON.stringify({ message: "No past or current races found" }),
         { status: 404 }
       );
     }
 
-    return new Response(JSON.stringify(nextRace), { status: 200 });
+    return new Response(JSON.stringify(currentRace), { status: 200 });
   } catch (error) {
     console.error('API Error:', error);
     return new Response("Failed to fetch current race", { status: 500 });
