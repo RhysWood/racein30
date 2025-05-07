@@ -7,7 +7,7 @@ const Nav = () => {
     <nav className="flex justify-center w-full mb-2 pt-3 relative">
       <Link href="/" className="flex items-center gap-2" aria-label="Go to homepage">
         <Image
-          src="/assets/logo.png"
+          src="/assets/logo1.png"
           priority
           alt="Racein30 Logo"
           width={100}
