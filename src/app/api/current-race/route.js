@@ -7,19 +7,18 @@ export async function GET() {
 
     const currentDate = new Date();
 
-    // Find the most recent race whose date is today or earlier
     const currentRace = await RaceWeekend.findOne({
       date: { $lte: currentDate }
     }).sort({ date: -1 });
 
-    if (!currentRace) {
-      return new Response(
-        JSON.stringify({ message: "No past or current races found" }),
-        { status: 404 }
-      );
-    }
+    const nextRace = await RaceWeekend.findOne({
+      date: { $gt: currentDate }
+    }).sort({ date: 1 });
 
-    return new Response(JSON.stringify(currentRace), { status: 200 });
+    return new Response(
+      JSON.stringify({ currentRace: currentRace || null, nextRace: nextRace || null }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
   } catch (error) {
     console.error('API Error:', error);
     return new Response("Failed to fetch current race", { status: 500 });

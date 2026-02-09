@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import VoteButtons from '../VoteButtons';
 
-// Mock dependencies (correct relative path for your project structure)
+// Mock dependencies
 jest.mock('../../../../utils/localStorage', () => ({
   hasVoted: jest.fn(),
   saveVote: jest.fn(),
@@ -21,7 +21,6 @@ describe('VoteButtons', () => {
 
   it('shows loading skeleton when loading', async () => {
     hasVoted.mockReturnValue(false);
-    // Keep fetch pending to simulate loading state
     global.fetch = jest.fn(() => new Promise(() => {}));
     render(<VoteButtons raceId={raceId} />);
     fireEvent.click(screen.getByText('Race in 30'));
@@ -31,8 +30,8 @@ describe('VoteButtons', () => {
   it('disables buttons if already voted', () => {
     hasVoted.mockReturnValue('full');
     render(<VoteButtons raceId={raceId} />);
-    expect(screen.getByText('Race in 30')).toBeDisabled();
-    expect(screen.getByText('Full Race Replay')).toBeDisabled();
+    expect(screen.getByRole('button', { name: /Race in 30/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /Full Race/i })).toBeDisabled();
     expect(screen.getByText(/Thanks for voting/i)).toBeInTheDocument();
   });
 
@@ -42,7 +41,7 @@ describe('VoteButtons', () => {
       Promise.resolve({ ok: true, json: () => Promise.resolve({}) })
     );
     render(<VoteButtons raceId={raceId} />);
-    fireEvent.click(screen.getByText('Full Race Replay'));
+    fireEvent.click(screen.getByText('Full Race'));
     await waitFor(() =>
       expect(screen.getByText(/Thanks for voting for the/i)).toBeInTheDocument()
     );
@@ -52,7 +51,6 @@ describe('VoteButtons', () => {
   it('shows error if vote fails', async () => {
     hasVoted.mockReturnValue(false);
     global.fetch = jest.fn(() => Promise.resolve({ ok: false }));
-    // Suppress expected error output
     jest.spyOn(console, 'error').mockImplementation(() => {});
     render(<VoteButtons raceId={raceId} />);
     fireEvent.click(screen.getByText('Race in 30'));

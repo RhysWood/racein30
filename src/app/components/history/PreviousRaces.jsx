@@ -16,7 +16,7 @@ export default function PreviousRaces() {
   if (!races.length) return null;
 
   return (
-    <section className="w-full max-w-2xl mt-8">
+    <section className="w-full max-w-2xl mt-4">
       <h3 className="text-lg font-semibold mb-4 text-center">Previous Races</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {races.map(race => {
@@ -26,10 +26,17 @@ export default function PreviousRaces() {
           return (
             <div
               key={race._id}
-              className="border rounded-lg p-6 bg-gray-50 shadow-sm flex flex-col gap-3"
+              className="rounded-xl p-5 bg-card-bg border border-card-border flex flex-col gap-3"
             >
-              <div className="font-bold text-base">{race.race}</div>
-              <div className="text-xs text-gray-500 mb-2">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-base">{race.race}</span>
+                {race.sprint && (
+                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase bg-racing-red/20 text-racing-red rounded-full">
+                    Sprint
+                  </span>
+                )}
+              </div>
+              <div className="text-xs text-muted mb-1">
                 {new Date(race.date).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
@@ -37,9 +44,9 @@ export default function PreviousRaces() {
                 })}
               </div>
               <div className="flex flex-col gap-2">
-                <div className="relative h-4 rounded-full overflow-hidden bg-gray-200">
+                <div className="relative h-2.5 rounded-full overflow-hidden bg-[#2a2a2a]">
                   <div
-                    className="absolute h-full bg-red-500"
+                    className="absolute h-full bg-racing-red"
                     style={{ width: `${fullRacePct}%` }}
                   />
                   <div
@@ -48,12 +55,12 @@ export default function PreviousRaces() {
                   />
                 </div>
                 <div className="flex justify-between text-xs mt-1">
-                  <span className="text-red-600">
-                    <span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-1 align-middle" />
+                  <span className="text-racing-red flex items-center gap-1">
+                    <span className="inline-block w-2 h-2 rounded-full bg-racing-red" />
                     {race.votes.fullRace}
                   </span>
-                  <span className="text-blue-500">
-                    <span className="inline-block w-2 h-2 rounded-full bg-blue-500 mr-1 align-middle" />
+                  <span className="text-blue-400 flex items-center gap-1">
+                    <span className="inline-block w-2 h-2 rounded-full bg-blue-500" />
                     {race.votes.raceIn30}
                   </span>
                 </div>

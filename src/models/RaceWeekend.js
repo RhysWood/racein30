@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const raceWeekendSchema = new mongoose.Schema({
   race: { type: String, required: true },
   date: { type: Date, required: true },
+  sprint: { type: Boolean, default: false },
   votes: {
     fullRace: { type: Number, default: 0 },
     raceIn30: { type: Number, default: 0 }

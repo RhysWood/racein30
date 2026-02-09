@@ -96,6 +96,10 @@ const raceWeekendSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$
         type: Date,
         required: true
     },
+    sprint: {
+        type: Boolean,
+        default: false
+    },
     votes: {
         fullRace: {
             type: Number,
@@ -126,7 +130,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend
 async function GET() {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$utils$2f$database$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDb"])();
-        const races = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({}).select('race date votes').sort({
+        const races = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find({}).select('race date sprint votes').sort({
             date: 1
         });
         if (!races) {

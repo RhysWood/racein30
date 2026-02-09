@@ -1,12 +1,20 @@
 export const hasVoted = (raceId) => {
-  if (typeof window === 'undefined') return false;
-  const votes = JSON.parse(localStorage.getItem('raceVotes') || '{}');
-  return !!votes[raceId];
+  try {
+    if (typeof window === 'undefined') return false;
+    const votes = JSON.parse(window.localStorage.getItem('raceVotes') || '{}');
+    return votes[raceId] || false;
+  } catch {
+    return false;
+  }
 };
 
 export const saveVote = (raceId, voteType) => {
-  if (typeof window === 'undefined') return;
-  const votes = JSON.parse(localStorage.getItem('raceVotes') || '{}');
-  votes[raceId] = voteType;
-  localStorage.setItem('raceVotes', JSON.stringify(votes));
+  try {
+    if (typeof window === 'undefined') return;
+    const votes = JSON.parse(window.localStorage.getItem('raceVotes') || '{}');
+    votes[raceId] = voteType;
+    window.localStorage.setItem('raceVotes', JSON.stringify(votes));
+  } catch {
+    // Storage unavailable
+  }
 };

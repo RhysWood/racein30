@@ -96,6 +96,10 @@ const raceWeekendSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$
         type: Date,
         required: true
     },
+    sprint: {
+        type: Boolean,
+        default: false
+    },
     votes: {
         fullRace: {
             type: Number,

@@ -33,9 +33,9 @@ describe('localStorage utils', () => {
     expect(hasVoted('race1')).toBe(false);
   });
 
-  it('returns true if vote exists', () => {
+  it('returns vote type if vote exists', () => {
     global.localStorage.setItem('raceVotes', JSON.stringify({ race1: 'upvote' }));
-    expect(hasVoted('race1')).toBe(true);
+    expect(hasVoted('race1')).toBe('upvote');
   });
 
   it('saves a vote and can detect it', () => {
@@ -44,6 +44,6 @@ describe('localStorage utils', () => {
       'raceVotes',
       JSON.stringify({ race2: 'downvote' })
     );
-    expect(hasVoted('race2')).toBe(true);
+    expect(hasVoted('race2')).toBe('downvote');
   });
 });

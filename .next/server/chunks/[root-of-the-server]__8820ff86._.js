@@ -96,6 +96,10 @@ const raceWeekendSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$
         type: Date,
         required: true
     },
+    sprint: {
+        type: Boolean,
+        default: false
+    },
     votes: {
         fullRace: {
             type: Number,
@@ -125,7 +129,6 @@ async function GET() {
     try {
         await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$utils$2f$database$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDb"])();
         const currentDate = new Date();
-        // Find the most recent race whose date is today or earlier
         const currentRace = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
             date: {
                 $lte: currentDate
@@ -133,15 +136,21 @@ async function GET() {
         }).sort({
             date: -1
         });
-        if (!currentRace) {
-            return new Response(JSON.stringify({
-                message: "No past or current races found"
-            }), {
-                status: 404
-            });
-        }
-        return new Response(JSON.stringify(currentRace), {
-            status: 200
+        const nextRace = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$models$2f$RaceWeekend$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne({
+            date: {
+                $gt: currentDate
+            }
+        }).sort({
+            date: 1
+        });
+        return new Response(JSON.stringify({
+            currentRace: currentRace || null,
+            nextRace: nextRace || null
+        }), {
+            status: 200,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     } catch (error) {
         console.error('API Error:', error);

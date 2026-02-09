@@ -7,7 +7,7 @@ export async function GET() {
     await connectToDb();
 
     const races = await RaceWeekend.find({})
-      .select('race date votes')
+      .select('race date sprint votes')
       .sort({ date: 1 });
 
     if (!races) {

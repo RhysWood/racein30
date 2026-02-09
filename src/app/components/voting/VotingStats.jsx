@@ -8,42 +8,36 @@ const VotingStats = ({ votes }) => {
 
   return (
     <div className="w-full max-w-md">
-      <div className="text-center mb-2 text-sm text-gray-500">
-        {totalVotes ? `Total Votes: ${totalVotes}` : 'No votes yet'}
-      </div>
-      
-      <div className="relative h-8 rounded-full overflow-hidden group border border-gray-200">
+      {totalVotes > 0 ? (
+        <div className="flex justify-between text-sm font-medium mb-2">
+          <span className="text-racing-red">
+            Full Race {Math.round(fullRacePercentage)}%
+          </span>
+          <span className="text-blue-400">
+            Race in 30 {Math.round(raceIn30Percentage)}%
+          </span>
+        </div>
+      ) : null}
+
+      <div className="relative h-3 rounded-full overflow-hidden bg-card-bg border border-card-border">
         {totalVotes > 0 ? (
           <>
-            <div 
-              className="absolute h-full bg-red-500 transition-all duration-300"
+            <div
+              className="absolute h-full bg-racing-red transition-all duration-300"
               style={{ width: `${fullRacePercentage}%` }}
             />
-            <div 
+            <div
               className="absolute h-full bg-blue-500 transition-all duration-300"
               style={{ width: `${raceIn30Percentage}%`, left: `${fullRacePercentage}%` }}
             />
           </>
         ) : (
-          <div className="absolute inset-0 bg-gray-100" />
+          <div className="absolute inset-0 bg-card-bg" />
         )}
-        
-        <div className="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center text-sm font-medium transition-opacity duration-200 bg-black/20">
-          {totalVotes > 0 ? (
-            <>
-              <span className="px-2 text-white">
-                Full Race: {Math.round(fullRacePercentage)}%
-              </span>
-              <span className="px-2 border-l border-white/20 text-white">
-                Race in 30: {Math.round(raceIn30Percentage)}%
-              </span>
-            </>
-          ) : (
-            <span className="text-gray-600">
-              Be the first to vote!
-            </span>
-          )}
-        </div>
+      </div>
+
+      <div className="text-center mt-2 text-xs text-muted">
+        {totalVotes ? `${totalVotes} votes` : 'No votes yet — be the first!'}
       </div>
     </div>
   );
